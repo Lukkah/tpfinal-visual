@@ -1,15 +1,32 @@
 package ar.edu.unju.fi.trackpersonas.model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * Creacion de la clase Persona
  * @author kry_m  
  *
  */
+@Entity
+@Table(name ="personas")
 public class Persona {
 //Declaracion de atributos o variables miembro
-String documento;
-String apellido;
-String nombres;
-String nacionalidad;
+	
+	@Id
+	@Column(name = "DOCUMENTO", nullable = true)
+	private String documento;
+	
+	@Column(name="APELLIDO")
+	private String apellido;
+	
+	@Column(name = "NOMBRES")
+	private String nombres;
+	
+	@Column(name = "Nombres")
+	private String nacionalidad;
 
 //constructor por defecto
 public Persona() {
