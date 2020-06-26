@@ -1,21 +1,77 @@
 package ar.edu.unju.fi.trackpersonas.model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.springframework.stereotype.Component;
+
+
+
+
 /**
  * Creacion de la clase Usuario   
  * con sus atributos
- * @author kry_m
+ * @author grupo 3
  *
  */
+@Component
+@Entity
+@Table(name = "usuarios")
 public class Usuario {
-	//declaracion de atributos o variables miembro
-	String nombreUsuario;
-	String password;
-	String nombreReal;
-	String apellidoReal;
-	String tipoUsuario;
+	//Declaracion de atributos o variables miembro
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="ID")
+	private Long id;
 	
+	@Column(name="NOMBRE_USUARIO", length = 50, nullable = true)
+	private String nombreUsuario;
+	
+	@Column(name="PASSWORD", length = 50, nullable = true)
+	private String password;
+	
+	@Column(name="NOMBRE_REAL", length = 50, nullable = true)
+	private String nombreReal;
+	
+	@Column(name="APELLIDO_REAL", length = 50, nullable = true)
+	private String apellidoReal;
+	
+	@Column(name="TIPO_USUARIO", length = 50, nullable = true)
+	private String tipoUsuario; 
+	
+	@OneToMany(mappedBy = "persona", cascade = CascadeType.ALL)
+	private List<ValidadorCondicionSanitaria> validaciones = new ArrayList<ValidadorCondicionSanitaria>();
+	
+	// Constructors
 	public Usuario() {
 		
 	}
+
+	/**
+	 * @param nombreUsuario
+	 * @param password
+	 * @param nombreReal
+	 * @param apellidoReal
+	 * @param tipoUsuario
+	 */
+	public Usuario(String nombreUsuario, String password, String nombreReal, String apellidoReal, String tipoUsuario) {
+		this.nombreUsuario = nombreUsuario;
+		this.password = password;
+		this.nombreReal = nombreReal;
+		this.apellidoReal = apellidoReal;
+		this.tipoUsuario = tipoUsuario;
+	}
+	
+	//GETTERS AND SETTERS
 
 	/**
 	 * @return the nombreUsuario
@@ -86,6 +142,36 @@ public class Usuario {
 	public void setTipoUsuario(String tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
+
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the validaciones
+	 */
+	public List<ValidadorCondicionSanitaria> getValidaciones() {
+		return validaciones;
+	}
+
+	/**
+	 * @param validaciones the validaciones to set
+	 */
+	public void setValidaciones(List<ValidadorCondicionSanitaria> validaciones) {
+		this.validaciones = validaciones;
+	}
+	
+	
 	
 	
 
