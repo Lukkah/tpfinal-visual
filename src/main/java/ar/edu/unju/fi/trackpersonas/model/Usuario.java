@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 /**
  * Creacion de la clase Usuario   
  * con sus atributos
- * @author grupo 3
+ * @author Grupo 3
  *
  */
 @Component
@@ -25,6 +25,7 @@ import org.springframework.stereotype.Component;
 @Table(name = "usuarios")
 public class Usuario {
 	//Declaracion de atributos o variables miembro
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="ID")
@@ -151,7 +152,5 @@ public class Usuario {
 		this.id = id;
 	}
 
-	
-	
 
 }

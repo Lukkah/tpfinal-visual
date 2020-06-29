@@ -1,11 +1,9 @@
 package ar.edu.unju.fi.trackpersonas.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import ar.edu.unju.fi.trackpersonas.model.Usuario;
 
-public interface IUsuarioDAO {
+public interface IUsuarioDAO extends JpaRepository<Usuario, Long> {
 	
-	public void guardarUsuario();
-	public Usuario mostrarUsuario();
-	public void eliminarUsuario();
-	public Usuario modificarUsuario();
 }

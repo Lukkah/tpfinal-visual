@@ -4,10 +4,10 @@ import ar.edu.unju.fi.trackpersonas.model.Usuario;
 
 public interface IUsuarioService {
 	
-	public void guardarUsuario();
-	public Usuario mostrarUsuario();
-	public void eliminarUsuario();
-	public Usuario modificarUsuario();
+	public void guardarUsuario(Usuario unUsuario);
+	//public Usuario mostrarUsuario();
+	//public void eliminarUsuario();
+	//public Usuario modificarUsuario();
 	
 
 }
