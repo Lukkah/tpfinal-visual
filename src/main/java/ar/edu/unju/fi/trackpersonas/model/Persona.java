@@ -2,8 +2,12 @@ package ar.edu.unju.fi.trackpersonas.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.springframework.stereotype.Component;
 
 /**
  * Creacion de la clase Persona
@@ -12,11 +16,17 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name ="personas")
+@Component
 public class Persona {
 //Declaracion de atributos o variables miembro
 	
 	@Id
-	@Column(name = "DOCUMENTO", nullable = true)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID")
+	private long id;
+	
+	
+	@Column(name = "DOCUMENTO")
 	private String documento;
 	
 	@Column(name="APELLIDO")
@@ -25,7 +35,7 @@ public class Persona {
 	@Column(name = "NOMBRES")
 	private String nombres;
 	
-	@Column(name = "Nombres")
+	@Column(name = "NACIONALIDADES")
 	private String nacionalidad;
 
 //constructor por defecto
@@ -97,6 +107,16 @@ public String getNacionalidad() {
 public void setNacionalidad(String nacionalidad) {
 	this.nacionalidad = nacionalidad;
 }
+
+public long getId() {
+	return id;
+}
+
+public void setId(long id) {
+	this.id = id;
+}
+
+
 
 }
 

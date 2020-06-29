@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Alta</title>
+</head>
+<body>
+	
+	<form th:action="@{/savePersona}" th:object=${persona} method="POST">
+		<h3>Alta persona</h3>
+		<div>
+			<label>Documento</label>
+			<input th:field ="*{documento}" type="text"  />
+		</div>
+		<div>
+			<label>Apellido</label>
+			<input th:field ="*{apellido}" type="text"  />
+		</div>
+		<div>
+			<label>Nombres</label>
+			<input th:field ="*{nombres}" type="text"  />
+		</div>
+		<div>
+			<label>Nacionalidad</label>
+			<input th:field ="*{nacionalidad}" type="text"  />
+		</div>
+		
+		
+		<div>
+			<input type="submit" value="guardar">
+		</div>
+	</form>
+	
+	
+</body>
+</html>
