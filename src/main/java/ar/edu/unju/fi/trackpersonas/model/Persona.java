@@ -1,12 +1,16 @@
 package ar.edu.unju.fi.trackpersonas.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 import org.springframework.stereotype.Component;
 
 /**
@@ -37,10 +41,12 @@ public class Persona {
 	
 	@Column(name = "NACIONALIDADES")
 	private String nacionalidad;
+	
+	@OneToMany(mappedBy = "persona", cascade = CascadeType.ALL)
+	private List<ValidadorCondicionSanitaria> validaciones = new ArrayList<ValidadorCondicionSanitaria>();
 
 //constructor por defecto
-public Persona() {
-	
+public Persona() { 
 }
 
 /**
@@ -114,6 +120,20 @@ public long getId() {
 
 public void setId(long id) {
 	this.id = id;
+}
+
+/**
+ * @return the validaciones
+ */
+public List<ValidadorCondicionSanitaria> getValidaciones() {
+	return validaciones;
+}
+
+/**
+ * @param validaciones the validaciones to set
+ */
+public void setValidaciones(List<ValidadorCondicionSanitaria> validaciones) {
+	this.validaciones = validaciones;
 }
 
 
