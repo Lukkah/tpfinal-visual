@@ -4,8 +4,6 @@
 package ar.edu.unju.fi.trackpersonas.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,8 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -47,19 +43,14 @@ public class ValidadorCondicionSanitaria implements Serializable{
 	private Boolean usaTapaboca;
 	
 	@Column(name = "CUMPLE_TERMINACION_DNI", nullable = false)
-	private Boolean cumpleTerminacionDNI;
+	private Boolean cumpleTerminacionDni;
 	
 	@Column(name = "POSEE_PERMISO_CIRCULACION", nullable = false)
 	private Boolean poseePermisoCirculacion;
 	
 	@Column(name = "ESTA_ACOMPANIADO", nullable = false)
 	private Boolean estaAcompaniado;
-	
-	@ManyToMany
-	@JoinTable(name = "validaciones_registros",
-	joinColumns = @JoinColumn(name = "VALIDADORCONDICIONSANITARIA_ID"),
-	inverseJoinColumns = @JoinColumn(name = "REGISTROTRACKING_ID"))
-	private List<RegistroTracking> validaciones = new ArrayList<RegistroTracking>();
+
 	
 	//Constructors
 	
@@ -81,7 +72,7 @@ public class ValidadorCondicionSanitaria implements Serializable{
 			Boolean poseePermisoCirculacion, Boolean estaAcompaniado) {
 		this.persona = persona;
 		this.usaTapaboca = usaTapaboca;
-		this.cumpleTerminacionDNI = cumpleTerminacionDNI;
+		this.cumpleTerminacionDni = cumpleTerminacionDNI;
 		this.poseePermisoCirculacion = poseePermisoCirculacion;
 		this.estaAcompaniado = estaAcompaniado;
 	}
@@ -122,14 +113,14 @@ public class ValidadorCondicionSanitaria implements Serializable{
 	 * @return the cumpleTerminacionDNI
 	 */
 	public Boolean getCumpleTerminacionDNI() {
-		return cumpleTerminacionDNI;
+		return cumpleTerminacionDni;
 	}
 
 	/**
 	 * @param cumpleTerminacionDNI the cumpleTerminacionDNI to set
 	 */
 	public void setCumpleTerminacionDNI(Boolean cumpleTerminacionDNI) {
-		this.cumpleTerminacionDNI = cumpleTerminacionDNI;
+		this.cumpleTerminacionDni = cumpleTerminacionDNI;
 	}
 
 	/**

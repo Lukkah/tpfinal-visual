@@ -2,7 +2,6 @@ package ar.edu.unju.fi.trackpersonas.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -56,7 +55,7 @@ public class RegistroTracking implements Serializable{
 	@JoinTable(name = "validaciones_registros",
 	joinColumns = @JoinColumn(name = "REGISTROTRACKING_ID"),
 	inverseJoinColumns = @JoinColumn(name = "VALIDADORCONDICIONSANITARIA_ID"))
-	private List<ValidadorCondicionSanitaria> validaciones = new ArrayList<ValidadorCondicionSanitaria>();
+	private List<ValidadorCondicionSanitaria> validaciones;
 	
 	//Constructores--------------------------------------------------------------------
 	/**
@@ -65,50 +64,51 @@ public class RegistroTracking implements Serializable{
 	public RegistroTracking() {
 		
 	}
-	
-	//Metodos accesores----------------------------------------------------------------
 
-	/**
-	 * @return the fechaHora
-	 */
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public LocalDateTime getFechaHora() {
 		return fechaHora;
 	}
 
-	/**
-	 * @param fechaHora the fechaHora to set
-	 */
 	public void setFechaHora(LocalDateTime fechaHora) {
 		this.fechaHora = fechaHora;
 	}
 
-	/**
-	 * @return the localidad
-	 */
 	public Barrio getLocalidad() {
 		return localidad;
 	}
 
-	/**
-	 * @param localidad the localidad to set
-	 */
 	public void setLocalidad(Barrio localidad) {
 		this.localidad = localidad;
 	}
 
-	/**
-	 * @return the detalleLugarRegistro
-	 */
 	public String getDetalleLugarRegistro() {
 		return detalleLugarRegistro;
 	}
 
-	/**
-	 * @param detalleLugarRegistro the detalleLugarRegistro to set
-	 */
 	public void setDetalleLugarRegistro(String detalleLugarRegistro) {
 		this.detalleLugarRegistro = detalleLugarRegistro;
 	}
+
+	public List<ValidadorCondicionSanitaria> getValidaciones() {
+		return validaciones;
+	}
+
+	public void setValidaciones(List<ValidadorCondicionSanitaria> validaciones) {
+		this.validaciones = validaciones;
+	}
+	
+	//Metodos accesores----------------------------------------------------------------
+
+	
+	
 	
 	
 	

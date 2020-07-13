@@ -1,6 +1,6 @@
 package ar.edu.unju.fi.trackpersonas.service;
 
-import java.util.Optional;
+import java.util.List;
 
 import ar.edu.unju.fi.trackpersonas.model.Barrio;
 /**
@@ -10,5 +10,7 @@ import ar.edu.unju.fi.trackpersonas.model.Barrio;
  */
 public interface IBarrioService {
 	public void guardarBarrio(Barrio barrio);
-	public Optional<Barrio> obtenerBarrioNombre(String nombre);
+	public Barrio obtenerBarrioNombre(String nombre);
+	
+	public List<Barrio> obtenerBarrios();
 }
