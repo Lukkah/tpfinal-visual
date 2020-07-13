@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.trackpersonas.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +23,13 @@ public class BarrioServiceImp implements IBarrioService{
 		barrioDaoImp.save(unBarrio);
 		
 	}
-	
+
+	@Override
+	public Optional<Barrio> obtenerBarrioNombre(String nombre) {
+		// TODO Auto-generated method stub
+		return barrioDaoImp.findByNombre(nombre);
+	}
+
 	
 
 }

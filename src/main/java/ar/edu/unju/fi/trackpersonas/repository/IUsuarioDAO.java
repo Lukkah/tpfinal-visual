@@ -1,9 +1,9 @@
 package ar.edu.unju.fi.trackpersonas.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
 import ar.edu.unju.fi.trackpersonas.model.Usuario;
 
-public interface IUsuarioDAO extends JpaRepository<Usuario, Long> {
+public interface IUsuarioDAO extends CrudRepository<Usuario, Long> {
 	
 }

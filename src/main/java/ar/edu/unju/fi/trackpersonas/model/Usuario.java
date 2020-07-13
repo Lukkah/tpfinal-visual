@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import org.springframework.stereotype.Component;
 
@@ -35,19 +37,25 @@ public class Usuario implements Serializable {
 	@Column(name="ID")
 	private Long id;
 	
-	@Column(name="NOMBRE_USUARIO", length = 50, nullable = true)
+	@NotBlank(message = "nombre de usuario requerido")
+	@Column(name="NOMBRE_USUARIO", length = 50)
 	private String nombreUsuario;
 	
-	@Column(name="PASSWORD", length = 50, nullable = true)
+	@NotBlank
+	@Size(min=8, message = "Su contraseña debe tener minimo 8 caracteres")
+	@Column(name="PASSWORD", length = 50)
 	private String password;
 	
-	@Column(name="NOMBRE_REAL", length = 50, nullable = true)
+	@NotBlank(message = "Nombre real requerido")
+	@Column(name="NOMBRE_REAL", length = 50)
 	private String nombreReal;
 	
-	@Column(name="APELLIDO_REAL", length = 50, nullable = true)
+	@NotBlank(message = "Apellido requerido")
+	@Column(name="APELLIDO_REAL", length = 50)
 	private String apellidoReal;
 	
-	@Column(name="TIPO_USUARIO", length = 50, nullable = true)
+	@NotBlank(message = "seleccione un tipo de usuario")
+	@Column(name="TIPO_USUARIO", length = 50)
 	private String tipoUsuario; 
 	
 	// Constructors

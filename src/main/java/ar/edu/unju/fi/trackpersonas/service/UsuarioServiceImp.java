@@ -1,6 +1,6 @@
 package ar.edu.unju.fi.trackpersonas.service;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +15,7 @@ public class UsuarioServiceImp implements IUsuarioService {
 	private IUsuarioDAO usuarioDaoImp;
 	@Override
 	public void guardarUsuario(Usuario unUsuario) {
-		usuarioDaoImp.save(unUsuario);
-		
+		usuarioDaoImp.save(unUsuario);	
 	}
 	@Override
 	public void eliminarUsuario(Long id) {
@@ -24,29 +23,28 @@ public class UsuarioServiceImp implements IUsuarioService {
 		
 	}
 	@Override
-	public Usuario modificarUsuario(Usuario unUsuario) throws Exception{
-		Usuario usuarioGuardar= mostrarUsuario(unUsuario.getId());
-		mapearUsuario(unUsuario, usuarioGuardar);
-		return usuarioDaoImp.save(usuarioGuardar);
-	}
-
-	@Override
-	public Usuario mostrarUsuario(Long id) throws Exception {
+	public Optional<Usuario> obtenerUsuario(Long id)  {
 		// TODO Auto-generated method stub
-		return usuarioDaoImp.findById(id).orElseThrow(()->new Exception("el usuario no se encuentra"));
+		Optional<Usuario> usuario= usuarioDaoImp.findById(id);
+		return usuario;
 	}
 	@Override
-	public List<Usuario> obtenerTodos() {
+	public Iterable<Usuario> obtenerTodos() {
 		// TODO Auto-generated method stub
 		return usuarioDaoImp.findAll();
 	}
-	
-	public void mapearUsuario(Usuario desde, Usuario hacia) {
-		hacia.setApellidoReal(desde.getApellidoReal());
-		hacia.setNombreReal(desde.getNombreReal());
-		hacia.setNombreUsuario(desde.getNombreUsuario());
-		hacia.setPassword(desde.getPassword());
-		hacia.setTipoUsuario(desde.getTipoUsuario());
+	@Override
+	public Usuario modificar(Usuario unUsuario){
+		// TODO Auto-generated method stub
+		Optional<Usuario> usuarioGuardar = obtenerUsuario(unUsuario.getId());
+		mapearUsuario(unUsuario, usuarioGuardar.get());		
+		return usuarioDaoImp.save(usuarioGuardar.get());
 	}
 	
+	public void mapearUsuario(Usuario desde, Usuario hacia) {
+		hacia.setNombreUsuario(desde.getNombreReal());
+		hacia.setApellidoReal(desde.getApellidoReal());
+		hacia.setNombreReal(desde.getNombreReal());
+		hacia.setPassword(desde.getPassword());
+	}
 }
