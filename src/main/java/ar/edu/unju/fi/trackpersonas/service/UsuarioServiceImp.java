@@ -3,6 +3,7 @@ package ar.edu.unju.fi.trackpersonas.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.trackpersonas.model.Usuario;
@@ -15,6 +16,9 @@ public class UsuarioServiceImp implements IUsuarioService {
 	private IUsuarioDAO usuarioDaoImp;
 	@Override
 	public void guardarUsuario(Usuario unUsuario) {
+		String pw= unUsuario.getPassword();
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
+		unUsuario.setPassword(bCryptPasswordEncoder.encode(pw));
 		usuarioDaoImp.save(unUsuario);	
 	}
 	@Override

@@ -21,8 +21,8 @@ public class MainController {
 	public String obtenerBarrios(Model model) {
 		return "barrios";
 	}
-	//@GetMapping({"/","/login"})
-	//public String ingresar(Model model) {
-		//return"login";
-	//}
+	@GetMapping({"/","/login"})
+	public String ingresar(Model model) {
+		return"login";
+	}
 }
