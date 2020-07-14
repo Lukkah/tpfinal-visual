@@ -29,6 +29,11 @@ public class PersonaController {
 		return "Personas";
 	}
 	
+	/**
+	 * Carga la pagina para el registro de personas
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/AltaPersona")
 	public String agregar(Model model) {
 		model.addAttribute("persona",persona);
@@ -37,13 +42,24 @@ public class PersonaController {
 		return "pruebaAlta";
 	}
 	
+	/**
+	 * Permite almacenar una persona
+	 * @param persona
+	 * @param model
+	 * @return
+	 */
 	@PostMapping("/savePersona")
 	public String guardar(@ModelAttribute Persona persona, Model model) {
 		personaService.guardarPersona(persona);
 		return "pruebaAlta";
 	}
 	
-	
+	/**
+	 * Permite obtener una persona en especifico
+	 * @param personaAux
+	 * @param model
+	 * @return
+	 */
 	@PostMapping("/getPersona")
 	public String getPersona(@ModelAttribute Persona personaAux, Model model) {
 

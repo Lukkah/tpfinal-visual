@@ -31,6 +31,11 @@ public class UsuarioController {
 		return "usuarios";
 	}
 	
+	/**
+	 * Carga la pagina para la gestion de usuarios
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/gestionUsuarios")
 	public String cargarGestion(Model model) {
 		model.addAttribute("usuario", usuario);
@@ -39,6 +44,13 @@ public class UsuarioController {
 		return "usuarios";
 	}
 	
+	/**
+	 * Permite almacenar un usuario desde la vista
+	 * @param usuario
+	 * @param result
+	 * @param model
+	 * @return
+	 */
 	@PostMapping("/saveUsuario")
 	public String guardar(@Valid @ModelAttribute Usuario usuario,  BindingResult result, Model model) {
 		// agregado Valid (en el modelo tambien) y BindingResult
@@ -64,11 +76,22 @@ public class UsuarioController {
 	return "usuarios";
 	}
 	
+	/**
+	 * Cancela la operacion que se estaba realizando
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/cancelar")
 	public String cancelarEditarUsuario(Model model) {
 		return "redirect:/gestionUsuarios";
 	}
 	
+	/**
+	 * Prepara los datos de un usuario específico para su modificacion
+	 * @param id
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/editar/{id}")
 	public String editarUsuario(@PathVariable(name="id") Long id,Model model) {
 		Optional<Usuario> usuario= usuarioService.obtenerUsuario(id);
@@ -80,6 +103,13 @@ public class UsuarioController {
 		return "usuarios";
 	}
 	
+	/**
+	 * Permite guardar datos modificados de un usuario
+	 * @param usuario
+	 * @param result
+	 * @param model
+	 * @return
+	 */
 	@PostMapping("/editar")
 	public String postEditarUsuario(@Valid @ModelAttribute("usuario") Usuario usuario, BindingResult result, Model model) {
 		if(result.hasErrors()) {
@@ -104,6 +134,12 @@ public class UsuarioController {
 		return cargarGestion(model);
 	}
 	
+	/**
+	 * Elimina un usuario desde la vista
+	 * @param id
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/eliminarUsuario/{id}")
 	public String eliminarUsuario(@PathVariable(name="id") Long id,Model model) {
 		usuarioService.eliminarUsuario(id);

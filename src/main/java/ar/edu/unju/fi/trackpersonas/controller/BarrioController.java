@@ -36,12 +36,23 @@ public class BarrioController {
 	//	return "Barrios";
 	//}
 	
+	/**
+	 * Carga la página para la gestion de localidades
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/gestionLocalidades")
 	public String agregar(Model model) {
 		model.addAttribute("barrio",barrio);
 		return "barrios";
 	}
 	
+	/**
+	 * Permite almacenar un barrio
+	 * @param barrio
+	 * @param model
+	 * @return
+	 */
 	@PostMapping("/saveBarrio")
 	public String guardar (@Validated Barrio barrio , Model model) {
 		barrioService.guardarBarrio(barrio);

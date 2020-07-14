@@ -43,6 +43,9 @@ public class Persona {
 public Persona() { 
 }
 
+
+
+//Metodos accesores------------------------------------------------------------------
 /**
  * muestra el documento
  * @return the documento

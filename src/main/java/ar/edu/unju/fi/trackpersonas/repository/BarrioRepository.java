@@ -10,5 +10,11 @@ import ar.edu.unju.fi.trackpersonas.model.Barrio;
  *
  */
 public interface BarrioRepository extends CrudRepository<Barrio, Long>{
+	
+	/**
+	 * Usa un string nombre para la busqueda de un barrio
+	 * @param nombre
+	 * @return un objeto Barrio
+	 */
 	public Barrio findByNombre(String nombre); 
 }

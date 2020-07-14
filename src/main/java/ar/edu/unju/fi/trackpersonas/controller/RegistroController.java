@@ -50,7 +50,11 @@ public class RegistroController {
 
 	List<ValidadorCondicionSanitaria> validaciones = new ArrayList<ValidadorCondicionSanitaria>();
 	
-	
+	/**
+	 * Carga la pagina de registro
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/createRegistro")
 	public String crearValidacion(Model model) {
 		List<Barrio> localidades = barrioService.obtenerBarrios();
@@ -61,7 +65,12 @@ public class RegistroController {
 		model.addAttribute("barrio",barrio);
 		return "RegistroForm";
 	}
-
+	
+	/**
+	 * Permite guardar los controles de una persona
+	 * @param validacion
+	 * @return
+	 */
 	@PostMapping("/saveValidacionRegistro")
 	public String guardarValidacion(@ModelAttribute ValidadorCondicionSanitaria validacion) {
 		validaciones.add(validacion);
@@ -70,7 +79,12 @@ public class RegistroController {
 		return "redirect:/createRegistro";
 	}
 	
-	
+	/**
+	 * Permite obtener una persona en especial
+	 * @param personaAux
+	 * @param model
+	 * @return
+	 */
 	@PostMapping("/getPersonaRegistro")
 	public String getPersonaValidacion(@ModelAttribute Persona personaAux, Model model) {
 		this.persona = new Persona();
@@ -81,6 +95,7 @@ public class RegistroController {
 		//return "RegistroForm";
 		return cargarPersonaEcontrada(model);
 	}
+	
 	
 	@GetMapping("/guardarValidacionRegistro")
 	public String cargarPersonaEcontrada(Model model) {
@@ -99,7 +114,11 @@ public class RegistroController {
 //
 //	}
 	
-	
+	/**
+	 * Permite guardar el registro de personas en un control
+	 * @param registro
+	 * @return
+	 */
 	@PostMapping("/saveRegistro")
 	public String guardarRegistro(@ModelAttribute RegistroTracking registro) {
 		registro.setFechaHora(LocalDateTime.now());

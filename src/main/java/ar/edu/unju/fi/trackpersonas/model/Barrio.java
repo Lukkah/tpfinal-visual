@@ -33,7 +33,7 @@ public class Barrio implements Serializable {
 	 @Column(name = "ID") 
 	 private long id;
 	 
-	//Variables miembro
+	//Variables miembro-------------------------------------------------
 	 @Column(name = "NOMBREBARRIO" , length = 100 , nullable = true)
 	 private String nombre;
 	 
@@ -57,6 +57,8 @@ public class Barrio implements Serializable {
 	}
 
 
+	
+	//Metodos accesores------------------------------------------------------------------
 	/**
 	 * @return the nombre
 	 */
