@@ -76,6 +76,7 @@ public class RegistroController {
 		validaciones.add(validacion);
 		validacionService.guardarValidacion(validacion);
 		System.out.println("Validacion guardada");
+		this.persona=new Persona();
 		return "redirect:/createRegistro";
 	}
 	
@@ -93,26 +94,11 @@ public class RegistroController {
 		model.addAttribute("validacion",validacion);
 		model.addAttribute("registro",registro);
 		//return "RegistroForm";
-		return cargarPersonaEcontrada(model);
+		return crearValidacion(model);
 	}
 	
 	
-	@GetMapping("/guardarValidacionRegistro")
-	public String cargarPersonaEcontrada(Model model) {
-		
-		return "RegistroForm";
-	}
 	
-//	@PostMapping("/getBarrio")
-//	public String getPersonaValidacion(@ModelAttribute Barrio barrioM, Model model) {
-//		this.barrio = new Barrio();
-//		this.barrio=barrioService.obtenerBarrioNombre(barrioM.getNombre());
-//		this.registro.setLocalidad(barrioM);
-//		model.addAttribute("registro",registro);
-//		//return "RegistroForm";
-//		return cargarBarrioEcontrado(model) ;
-//
-//	}
 	
 	/**
 	 * Permite guardar el registro de personas en un control
@@ -125,6 +111,9 @@ public class RegistroController {
 		registro.setValidaciones(validaciones);
 		registroService.guardarRegistro(registro);
 		System.out.println("Registro guardado");
+		this.validaciones = new ArrayList<ValidadorCondicionSanitaria>();
+		this.persona = new Persona();
+		this.registro = new RegistroTracking();
 		return "redirect:/createRegistro";
 	}
 	

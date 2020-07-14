@@ -51,7 +51,7 @@ public class PersonaController {
 	@PostMapping("/savePersona")
 	public String guardar(@ModelAttribute Persona persona, Model model) {
 		personaService.guardarPersona(persona);
-		return "pruebaAlta";
+		return agregar(model);
 	}
 	
 	/**
@@ -62,9 +62,9 @@ public class PersonaController {
 	 */
 	@PostMapping("/getPersona")
 	public String getPersona(@ModelAttribute Persona personaAux, Model model) {
-
-		this.persona=personaService.getPersonaByDni(personaAux.getDocumento());
-		return "redirect:/AltaPersona";
+		this.personaAux=personaService.getPersonaByDni(personaAux.getDocumento());
+		model.addAttribute(this.personaAux);
+		return agregar(model);
 	}
 
 	
