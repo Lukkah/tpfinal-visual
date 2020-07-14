@@ -16,12 +16,13 @@ import ar.edu.unju.fi.trackpersonas.service.LoginUsuarioServiceImp;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
-	@Autowired
-	private AutenticacionSuccessHandler autenticacion;
-	
 	String[] resources = new String[]{
             "/include/**","/css/**","/icons/**","/img/**","/js/**","/layer/**","/webjars/**"
     };
+
+	@Autowired
+	private AutenticacionSuccessHandler autenticacion;
+	
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -29,9 +30,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 				.antMatchers(resources).permitAll()
 				.antMatchers("/", "/home").permitAll()
-				.antMatchers("/", "/gestionUsuarios").permitAll()
-				.antMatchers("/", "/saveUsuario").permitAll()
-				.antMatchers("/", "/eliminarUsuario/{id}").permitAll()
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()

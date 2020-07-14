@@ -26,6 +26,11 @@ public class UsuarioController {
 	@Autowired
 	private IUsuarioService usuarioService;
 	
+	@RequestMapping("/usuarios")
+	public String obtenerUsuarios(Model model) {
+		return "usuarios";
+	}
+	
 	@GetMapping("/gestionUsuarios")
 	public String cargarGestion(Model model) {
 		model.addAttribute("usuario", usuario);

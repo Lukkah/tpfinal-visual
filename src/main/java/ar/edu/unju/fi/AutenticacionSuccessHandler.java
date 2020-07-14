@@ -42,12 +42,11 @@ public class AutenticacionSuccessHandler implements AuthenticationSuccessHandler
 		}
 		}
 		if (tipoDB) {
-			redirectStrategy.sendRedirect(request, response, "/gestionUsuario");
-			redirectStrategy.sendRedirect(request, response, "/saveUsuario");
+			redirectStrategy.sendRedirect(request, response, "/gestionUsuarios");
 			redirectStrategy.sendRedirect(request, response, "/gestionLocalidades");
 		} else {
 			if (tipoAdmin) {
-				redirectStrategy.sendRedirect(request, response, "/personas");
+				redirectStrategy.sendRedirect(request, response, "/createRegistro");
 		} else {
 			if (tipoConsultor) {
 				redirectStrategy.sendRedirect(request, response, "/home");

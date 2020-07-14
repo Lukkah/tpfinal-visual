@@ -26,6 +26,11 @@ public class BarrioController {
 	@Autowired
 	private Barrio barrio;
 	
+	@RequestMapping("/barrios")
+	public String obtenerBarrios(Model model) {
+		return "barrios";
+	}
+	
 	//@RequestMapping("/barrios")
 	//public String getBarrios (Model model) {
 	//	return "Barrios";

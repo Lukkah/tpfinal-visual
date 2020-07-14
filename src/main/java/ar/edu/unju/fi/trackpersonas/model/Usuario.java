@@ -38,24 +38,24 @@ public class Usuario implements Serializable {
 	private Long id;
 	
 	@NotBlank(message = "nombre de usuario requerido")
-	@Column(name="NOMBRE_USUARIO", length = 50)
+	@Column(name="NOMBRE_USUARIO")
 	private String nombreUsuario;
 	
 	@NotBlank
 	@Size(min=8, message = "Su contraseña debe tener minimo 8 caracteres")
-	@Column(name="PASSWORD", length = 50)
+	@Column(name="PASSWORD")
 	private String password;
 	
 	@NotBlank(message = "Nombre real requerido")
-	@Column(name="NOMBRE_REAL", length = 50)
+	@Column(name="NOMBRE_REAL")
 	private String nombreReal;
 	
 	@NotBlank(message = "Apellido requerido")
-	@Column(name="APELLIDO_REAL", length = 50)
+	@Column(name="APELLIDO_REAL")
 	private String apellidoReal;
 	
 	@NotBlank(message = "seleccione un tipo de usuario")
-	@Column(name="TIPO_USUARIO", length = 50)
+	@Column(name="TIPO_USUARIO")
 	private String tipoUsuario; 
 	
 	// Constructors
