@@ -24,12 +24,12 @@ public class TpFinalGrupo3Application implements CommandLineRunner{
 	
 	@Override
 	public void run(String... args) throws Exception {
-		// inicializo las las variables de mi objeto usuario
-		//usuario.setApellidoReal("root");
-		//usuario.setPassword("12345678");
-		//usuario.setNombreUsuario("root");
-		//usuario.setNombreReal("root");
-		//usuario.setTipoUsuario("DB");
-		//usuarioService.guardarUsuario(usuario);
+		 //inicializo las las variables de mi objeto usuario
+//		usuario.setApellidoReal("root");
+//		usuario.setPassword("12345678");
+//		usuario.setNombreUsuario("root");
+//		usuario.setNombreReal("root");
+//		usuario.setTipoUsuario("DB");
+//		usuarioService.guardarUsuario(usuario);
 	}
 }

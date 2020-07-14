@@ -51,7 +51,7 @@ public class UsuarioController {
 			try {
 				usuarioService.guardarUsuario(usuario);
 				//model.addAttribute("listarUsuarios", usuarioService.obtenerTodos());
-				model.addAttribute("formTab", "active");
+				model.addAttribute("listTab", "active");
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				// pasar las excepciones al html
@@ -61,17 +61,46 @@ public class UsuarioController {
 				model.addAttribute("formTab", "active");
 			}
 		}
-	return cargarGestion(model);
+	return "usuarios";
 	}
+	
 	@GetMapping("/cancelar")
 	public String cancelarEditarUsuario(Model model) {
-		return "redirect:/formulario";
+		return "redirect:/gestionUsuarios";
 	}
 	
 	@GetMapping("/editar/{id}")
 	public String editarUsuario(@PathVariable(name="id") Long id,Model model) {
 		Optional<Usuario> usuario= usuarioService.obtenerUsuario(id);
 		model.addAttribute("usuario", usuario);
+		model.addAttribute("listarUsuarios", usuarioService.obtenerTodos());
+		model.addAttribute("formTab", "active");
+		model.addAttribute("editMode", "true");
+		
+		return "usuarios";
+	}
+	
+	@PostMapping("/editar")
+	public String postEditarUsuario(@Valid @ModelAttribute("usuario") Usuario usuario, BindingResult result, Model model) {
+		if(result.hasErrors()) {
+			model.addAttribute("usuario",usuario);
+			model.addAttribute("formTab","active");
+			model.addAttribute("editMode","true");
+		} else {
+			try {
+				usuarioService.modificar(usuario);
+				model.addAttribute("usuario",this.usuario);
+				model.addAttribute("listTab","active");
+				model.addAttribute("editMode","false");
+			}catch (Exception e) {
+				model.addAttribute("formUsuarioErrorMessage", e.getMessage());
+				model.addAttribute("usuario", usuario);
+				model.addAttribute("listarUsuarios", usuarioService.obtenerTodos());
+				model.addAttribute("formTab", "active");
+				model.addAttribute("editMode","true");
+			}
+		}
+		model.addAttribute("listarUsuarios", usuarioService.obtenerTodos());
 		return cargarGestion(model);
 	}
 	
