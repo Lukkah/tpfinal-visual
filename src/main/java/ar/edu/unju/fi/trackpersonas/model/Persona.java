@@ -121,6 +121,14 @@ public void setId(long id) {
 
 
 
+@Override
+public String toString() {
+	return "Persona [id=" + id + ", documento=" + documento + ", apellido=" + apellido + ", nombres=" + nombres
+			+ ", nacionalidad=" + nacionalidad + "]";
+}
+
+
+
 
 }
 

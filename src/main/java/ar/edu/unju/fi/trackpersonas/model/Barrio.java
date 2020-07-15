@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,7 +38,7 @@ public class Barrio implements Serializable {
 	 @Column(name = "NOMBREBARRIO" , length = 100 , nullable = true)
 	 private String nombre;
 	 
-	 @OneToMany(mappedBy = "localidad", cascade = CascadeType.ALL)
+	 @OneToMany(mappedBy = "localidad", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	 private List<RegistroTracking> registros = new ArrayList<RegistroTracking>();
 	
 	
@@ -87,6 +88,26 @@ public class Barrio implements Serializable {
 	public void setId(long id) {
 		this.id = id;
 	}
+
+
+
+	/**
+	 * @return the registros
+	 */
+	public List<RegistroTracking> getRegistros() {
+		return registros;
+	}
+
+
+
+	/**
+	 * @param registros the registros to set
+	 */
+	public void setRegistros(List<RegistroTracking> registros) {
+		this.registros = registros;
+	}
+	
+	
 
 	
 

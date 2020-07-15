@@ -1,6 +1,7 @@
 package ar.edu.unju.fi.trackpersonas.service.imp;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,12 @@ public class PersonaServiceImp implements IPersonaService {
 	@Override
 	public Persona getPersonaByDni(String dni) {
 		return personaRepository.findByDocumento(dni);
+	}
+
+	@Override
+	public Optional<Persona> obtenerPersonaId(Long id) {
+		
+		return personaRepository.findById(id);
 	}
 
 

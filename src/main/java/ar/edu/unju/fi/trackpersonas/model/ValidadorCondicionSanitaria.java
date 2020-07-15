@@ -4,6 +4,8 @@
 package ar.edu.unju.fi.trackpersonas.model;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +19,9 @@ import javax.persistence.Table;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import ar.edu.unju.fi.trackpersonas.service.IPersonaService;
+import ar.edu.unju.fi.trackpersonas.service.imp.PersonaServiceImp;
 
 /**
  * @author GRUPO 3
@@ -50,7 +55,8 @@ public class ValidadorCondicionSanitaria implements Serializable{
 	
 	@Column(name = "ESTA_ACOMPANIADO", nullable = false)
 	private Boolean estaAcompaniado;
-
+	
+	
 	
 	//Constructors
 	
@@ -164,7 +170,23 @@ public class ValidadorCondicionSanitaria implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+	@Override
+	public String toString() {
+		return "ValidadorCondicionSanitaria [id=" + id + ", persona=" + persona + ", usaTapaboca=" + usaTapaboca
+				+ ", cumpleTerminacionDni=" + cumpleTerminacionDni + ", poseePermisoCirculacion="
+				+ poseePermisoCirculacion + ", estaAcompaniado=" + estaAcompaniado + "]";
+	}
 	
 	
+	
+	
+	
+	private Optional<Persona>obtenerPersona(Long id){
+		
+		IPersonaService personaService = new PersonaServiceImp() ;
+		
+		return personaService.obtenerPersonaId(id);
+	}
 	
 }

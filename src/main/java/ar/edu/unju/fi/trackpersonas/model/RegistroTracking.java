@@ -51,7 +51,7 @@ public class RegistroTracking implements Serializable{
 	@Column(name = "DETALLE_REGISTRO", nullable = false)
 	private String detalleLugarRegistro;
 	
-	@ManyToMany
+	@ManyToMany(fetch =FetchType.LAZY)
 	@JoinTable(name = "validaciones_registros",
 	joinColumns = @JoinColumn(name = "REGISTROTRACKING_ID"),
 	inverseJoinColumns = @JoinColumn(name = "VALIDADORCONDICIONSANITARIA_ID"))
@@ -103,6 +103,12 @@ public class RegistroTracking implements Serializable{
 
 	public void setValidaciones(List<ValidadorCondicionSanitaria> validaciones) {
 		this.validaciones = validaciones;
+	}
+
+	@Override
+	public String toString() {
+		return "RegistroTracking [id=" + id + ", fechaHora=" + fechaHora + ", localidad=" + localidad
+				+ ", detalleLugarRegistro=" + detalleLugarRegistro + ", validaciones=" + validaciones + "]";
 	}
 	
 	//Metodos accesores----------------------------------------------------------------
