@@ -10,43 +10,49 @@
 	<div class="container">
 		<div th:insert="layout/header :: header"></div>
 
-		<div class="row">
-			<div class="col-md-12 offset-md-1">
-				<h1>Obtener Persona</h1>
-				<form th:action="@{/buscarPersonaCosulta}" th:object=${persona}
-					method="POST">
-					<label>Ingrese persona</label> 
-					<input th:field="*{documento}" type="text"
-						class="form-control" id="nombreLocalidad">
-					<div class="form-group row">
-						<div class="col-sm-12 text-center">
-							<button type="submit" class="btn btn-primary" value="guardar">GUARDAR</button>
-						</div>
+		<div th:each="rol :${#authentication.getPrincipal().getAuthorities()}">
+			<div th:if="${rol.toString() == 'CONSULTOR'}">
+				<div class="row">
+					<div class="col-md-12 offset-md-1">
+						<h1>Obtener Persona</h1>
+						<form th:action="@{/buscarPersonaCosulta}" th:object=${persona}
+							method="POST">
+							<label>Ingrese persona</label> <input th:field="*{documento}"
+								type="text" class="form-control" id="nombreLocalidad">
+							<div class="form-group row">
+								<div class="col-sm-12 text-center">
+									<button type="submit" class="btn btn-primary" value="guardar">GUARDAR</button>
+								</div>
+							</div>
+						</form>
+						<div th:text="${persona.apellido}"></div>
 					</div>
-				</form>
-				<div th:text="${persona.apellido}"></div>
+				</div>
+				<div class="row">
+					<div class="table-responsive">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Localidad</th>
+									<th>Fecha y Hora</th>
+									<th>Descripcion</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="registro :${registros}">
+									<td th:text="${registro.localidad.nombre}"></td>
+									<td th:text="${registro.fechaHora}"></td>
+									<td th:text="${registro.detalleLugarRegistro}"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
 			</div>
 		</div>
-		<div class="row">
-			<div class="table-responsive">
-				<table class="table table-striped">
-					<thead>
-						<tr>
-							<th>Localidad</th>
-							<th>Fecha y Hora</th>
-							<th>Descripcion</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="registro :${registros}">
-							<td th:text="${registro.localidad.nombre}"></td>
-							<td th:text="${registro.fechaHora}"></td>
-							<td th:text="${registro.detalleLugarRegistro}"></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
+
+
 
 		<div th:insert="layout/footer :: footer"></div>
 	</div>

@@ -49,7 +49,7 @@ public class AutenticacionSuccessHandler implements AuthenticationSuccessHandler
 				redirectStrategy.sendRedirect(request, response, "/AltaPersona");
 		} else {
 			if (tipoConsultor) {
-				redirectStrategy.sendRedirect(request, response, "/obtenerPersonasLocalidad");
+				redirectStrategy.sendRedirect(request, response, "/consutaRecorrido");
 			} else {
 				throw new IllegalStateException();	
 			}

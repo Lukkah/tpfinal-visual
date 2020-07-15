@@ -54,6 +54,9 @@ public class ConsultaController {
 	@Autowired
 	RegistroTracking registro;
 	
+	@Autowired
+	RegistroTracking registroAux;
+	
 	LocalDateTime desde;
 	LocalDateTime hasta;
 	
@@ -73,9 +76,9 @@ public class ConsultaController {
 	public String cargarCampos(Model model) {
 		model.addAttribute("localidades",barrioService.obtenerBarrios());
 		model.addAttribute("barrio",barrio);
-		model.addAttribute("fechaDesde", desde);
-		model.addAttribute("fechaHasta", hasta);
 		model.addAttribute("personas", personas2=obtenerPersonasPorLocalidadHoraFecha());
+		model.addAttribute("registro", registro);
+		model.addAttribute("registroAux", registroAux);
 		return "personasLocalidad";
 	}
 	
@@ -86,9 +89,10 @@ public class ConsultaController {
 			personas.add(persona);
 			return validadorCondicionSanitaria;
 	}
+	
 	public List<Persona> obtenerPersonasPorLocalidadHoraFecha(){
 		
-		for (RegistroTracking registro : registroService.obtenerRegistroEntreFechasLocalidad(LocalDateTime.of(2020, 6, 15, 00, 19,47), LocalDateTime.of(2020, 7, 15, 21, 21, 00),barrioService.obtenerBarrioNombre("San salvador de Jujuy"))) {
+		for (RegistroTracking registro : registroService.obtenerRegistroEntreFechasLocalidad(LocalDateTime.of(2020, 6, 15, 00, 19,47), LocalDateTime.of(2020, 7, 15, 21, 21, 00),barrioService.obtenerBarrioNombre("Tilcara"))) {
 			for (ValidadorCondicionSanitaria validador : registro.getValidaciones()) {
 				validador= asignacionPersona(validador.getId());
 			}
@@ -96,6 +100,22 @@ public class ConsultaController {
 		
 		return personas;
 	}
+	
+//	//@PostMapping("/guardarDatos")
+//	public String guardarDatos(@Valid @ModelAttribute RegistroTracking registroAux, Model model) {
+//		//for (RegistroTracking registro : registroService.obtenerRegistroEntreFechasLocalidad(LocalDateTime.of(2020, 6, 15, 00, 19,47), LocalDateTime.of(2020, 7, 15, 21, 21, 00),registroAux.getLocalidad())) {
+//			//for (ValidadorCondicionSanitaria validador : registro.getValidaciones()) {
+//				//validador= asignacionPersona(validador.getId());
+//			//}
+//		//}
+//		model.addAttribute(personas2=obtenerPersonasPorLocalidadHoraFecha(registroAux.getLocalidad()));
+//		//model.addAttribute(personas);
+//	
+//		
+//		return cargarCampos(model);
+//	}
+	
+	
 	
 	
 

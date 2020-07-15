@@ -9,51 +9,67 @@
 <body>
 	<div class="container">
 		<div th:insert="layout/header :: header"></div>
+		<div th:each="rol :${#authentication.getPrincipal().getAuthorities()}">
+			<div th:if="${rol.toString() == 'CONSULTOR'}">
 
-		<div class="row">
-			<div class="col-md-6 offset-md-1">
-				<h1>Obtener Persona</h1>
-				<form action="">
-				
-					<div>
-						<br> <label>Seleccione un barrio</label>
-						<div class="form-group row">
-						<select th:field="*{barrio.id}">
-							<option th:each="barrio :${localidades}" th:value="${barrio.id}" th:text="${barrio.nombre}">
-						</select>
-						</div>
+				<div class="row">
+					<div class="col-md-6 offset-md-1">
+						<h1>Obtener Persona</h1>
+						<form th:action="@{/guardarDatos}" th:object="${registroAux}" method="POST">
+
+							<div>
+								<br> <label>Seleccione un barrio</label>
+								<div class="form-group row">
+									<select th:field="*{localidad}">
+										<option th:each="barrio :${localidades}"
+											th:value="${barrio}" th:text="${barrio.nombre}">
+									</select>
+								</div>
+							</div>
+							
+							<br>
+							<div class="form-group row">
+								<div class="col-sm-12 text-center">
+									<input type="submit" value="buscar" class="btn btn-primary">
+								</div>
+							</div>
+
+
+						</form>
 
 					</div>
-				
-				
-				</form>
+				</div>
+				<div class="row">
+					<div class="table-responsive">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>Apellido</th>
+									<th>Nombre</th>
+									<th>Nacionalidad</th>
+									<th>Documento</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="persona:${personas}">
+									<td th:text="${persona.id}"></td>
+									<td th:text="${persona.apellido}"></td>
+									<td th:text="${persona.nombres}"></td>
+									<td th:text="${persona.nacionalidad}"></td>
+									<td th:text="${persona.documento}"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
 
 			</div>
 		</div>
-		<div class="row">
-			<div class="table-responsive">
-				<table class="table table-striped">
-					<thead>
-						<tr>
-							<th>ID</th>
-							<th>Apellido</th>
-							<th>Nombre</th>
-							<th>Nacionalidad</th>
-							<th>Documento</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="persona:${personas}">
-							<td th:text="${persona.id}"></td>
-							<td th:text="${persona.apellido}"></td>
-							<td th:text="${persona.nombres}"></td>
-							<td th:text="${persona.nacionalidad}"></td>
-							<td th:text="${persona.documento}"></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
+
+
+
 
 		<div th:insert="layout/footer :: footer"></div>
 	</div>

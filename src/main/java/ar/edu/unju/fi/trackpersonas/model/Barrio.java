@@ -106,8 +106,8 @@ public class Barrio implements Serializable {
 	public void setRegistros(List<RegistroTracking> registros) {
 		this.registros = registros;
 	}
-	
-	
+
+
 
 	
 
