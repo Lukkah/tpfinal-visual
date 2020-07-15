@@ -14,21 +14,31 @@
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item active"><a class="nav-link" href="home">Home<span
 							class="sr-only">(current)</span></a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="gestionUsuarios">Gestion-Usuarios</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="gestionLocalidades">Gestion-Localidades</a>
-					</li>
-					<li class="nav-item"><a class="nav-link"
-						href="createRegistro">Registro-TrackPersonas</a>
-					</li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> BD </a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="gestionLocalidades">Registrar
+								Localidades</a> <a class="dropdown-item" href="gestionUsuarios">Gestionar
+								Usuarios</a>
+						</div></li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> Registro </a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="AltaPersona">Registrar
+								Personas</a> <a class="dropdown-item" href="createRegistro">Registrar
+								Controles</a>
+						</div></li>
 				</ul>
 
-				<!--  <ul class="navbar-nav mt-2 mt-lg-0">
+				 <ul class="navbar-nav mt-2 mt-lg-0">
 					<li class="nav-item"><a class="btn btn-outline-dark" href="#" th:href="@{/logout}"> <span
 							th:text="${#authentication.getPrincipal().getUsername()}">
 						</span> - <span> Salir </span><span class="float-right"> <i class="fas fa-sign-out-alt"></i></span></a></li>
-				</ul>-->
+				</ul>
 			</div>
 		</nav>
 	</div>

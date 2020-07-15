@@ -46,7 +46,7 @@ public class AutenticacionSuccessHandler implements AuthenticationSuccessHandler
 			//redirectStrategy.sendRedirect(request, response, "/gestionLocalidades");
 		} else {
 			if (tipoAdmin) {
-				redirectStrategy.sendRedirect(request, response, "/createRegistro");
+				redirectStrategy.sendRedirect(request, response, "/AltaPersona");
 		} else {
 			if (tipoConsultor) {
 				redirectStrategy.sendRedirect(request, response, "/home");

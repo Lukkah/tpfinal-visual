@@ -7,161 +7,209 @@
 	href="/webjars/bootstrap/4.5.0/css/bootstrap.min.css">
 </head>
 <body>
+
 	<div class="container">
 		<div th:insert="layout/header :: header"></div>
-		<!-- Nav tabs -->
-		<ul class="nav nav-tabs" id="myTab" role="tablist">
-			<li class="nav-item"><a class="nav-link active" id="formulario-tab" th:classappend="${formTab}"
-				data-toggle="tab" href="#formulario" role="tab" aria-controls="formulario" aria-selected="true">Formulario</a>
-			</li>
-			<li class="nav-item"><a class="nav-link" id="tabla-tab" th:classappend="${listTab}" data-toggle="tab" href="#lista"
-				role="tab" aria-controls="lista" aria-selected="false">Lista</a>
-			</li>
-		</ul>
-		<!-- Tab panes -->
-		<div class="tab-content">
+		<div th:each="rol :${#authentication.getPrincipal().getAuthorities()}">
+			<div th:if="${rol.toString() == 'DB'}">
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs" id="myTab" role="tablist">
+					<li class="nav-item"><a class="nav-link active"
+						id="formulario-tab" th:classappend="${formTab}" data-toggle="tab"
+						href="#formulario" role="tab" aria-controls="formulario"
+						aria-selected="true">Formulario</a></li>
+					<li class="nav-item"><a class="nav-link" id="tabla-tab"
+						th:classappend="${listTab}" data-toggle="tab" href="#lista"
+						role="tab" aria-controls="lista" aria-selected="false">Lista</a></li>
+				</ul>
+				<!-- Tab panes -->
+				<div class="tab-content">
 
-			<!-- Formulario Registro de Usuarios -->
-			<div class="tab-pane fade show" id="formulario"
-				th:classappend="${formTab}" role="tabpanel"
-				aria-labelledby="formulario-tab">
-				<div class="row">
-					<div class="col-md-6 offset-md-3">
-						<h1>Alta usuario</h1>
-						<form class="formularioUsuario" role="form" autocomplete="off"
-							th:action="${editMode}?@{/editar}:@{/saveUsuario}" th:object=${usuario} method="POST">
-							<!-- es necesario para pasar la validacion -->						
-								<input class="form-control" type=hidden th:field="${usuario.id}" th:if="${editMode}">
-								<input class="form-control" type=hidden th:field="${usuario.password}" th:if="${editMode}">
-								<input class="form-control" type=hidden th:field="${usuario.tipoUsuario}" th:if="${editMode}">
-							
-							<div class="form-group row">
-								<label for="nameUser" class="col-sm-12 col-form-label">Nombre de Usuario</label>
-								<div class="col-sm-12">
-									<input th:field="${usuario.nombreUsuario}" type="text" class="form-control" id="nameUser">
-									<div class="alert-danger" th:if="${#fields.hasErrors('nombreUsuario')}" th:errors="*{nombreUsuario}">Name Error</div>
-								</div>
-							</div>
-							<div class="form-group row" th:if="${editMode==null or editMode==false}">
-								<label for="contraseña" class="col-sm-12 col-form-label">Password</label>
-								<div class="col-sm-12">
-									<input th:field="${usuario.password}" type="password" class="form-control" id="contraseña">
-									<div class="alert-danger" th:if="${#fields.hasErrors('password')}"  th:errors="*{password}">Name Error</div>
-								</div>
-							</div>
+					<!-- Formulario Registro de Usuarios -->
+					<div class="tab-pane fade show" id="formulario"
+						th:classappend="${formTab}" role="tabpanel"
+						aria-labelledby="formulario-tab">
+						<div class="row">
+							<div class="col-md-6 offset-md-3">
+								<h1>Alta usuario</h1>
+								<form class="formularioUsuario" role="form" autocomplete="off"
+									th:action="${editMode}?@{/editar}:@{/saveUsuario}"
+									th:object=${usuario} method="POST">
+									<!-- es necesario para pasar la validacion -->
+									<input class="form-control" type=hidden
+										th:field="${usuario.id}" th:if="${editMode}"> <input
+										class="form-control" type=hidden
+										th:field="${usuario.password}" th:if="${editMode}"> <input
+										class="form-control" type=hidden
+										th:field="${usuario.tipoUsuario}" th:if="${editMode}">
 
-							<div class="form-group row">
-								<label for="nombre" class="col-sm-12 col-form-label">Nombre Real</label>
-								<div class="col-sm-12">
-									<input th:field="${usuario.nombreReal}" type="text" class="form-control" id="nombre">
-									<div class="alert-danger" th:if="${#fields.hasErrors('nombreReal')}" th:errors="*{nombreReal}">Name Error</div>
-								</div>
-							</div>
-
-							<div class="form-group row">
-								<label for="apellido" class="col-sm-12 col-form-label">Apellido Real</label>
-								<div class="col-sm-12">
-									<input th:field="${usuario.apellidoReal}" type="text" class="form-control" id="apellido">
-									<div class="alert-danger" th:if="${#fields.hasErrors('apellidoReal')}" th:errors="*{apellidoReal}">Name Error</div>
-								</div>
-							</div>
-
-							<div class=" form-group row" th:if="${editMode==null or editMode==false}">
-								<label class="col-sm-2 col-form-label">Tipo Usuario</label>
-								<div class="col-sm-10">
-									<div class="form-check">
-										<input class="form-check-input" type="radio" name="gridRadios"
-											th:field="${usuario.tipoUsuario}" id="gridRadios1"
-											value="CONSULTOR" checked> 
-										<label class="form-check-label" for="gridRadios1"> CONSULTOR</label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="radio" name="gridRadios"
-											th:field="${usuario.tipoUsuario}" id="gridRadios2"
-											value="ADMINISTRADOR"> 
-											<label class="form-check-label" for="gridRadios2"> ADMINISTRADOR </label>
-									</div>
-									<div class="alert-danger" th:if="${#fields.hasErrors('tipoUsuario')}" th:errors="*{tipoUsuario}">Name Error</div>
-									<div class="form-check">
-										<input class="form-check-input" type="radio" name="gridRadios"
-											th:field="${usuario.tipoUsuario}" id="gridRadios3" value="DB">
-										<label class="form-check-label" for="gridRadios3"> DB </label>
-									</div>
-								</div>
-							</div>
-							<div class="form-group row">
-								<div class="col-sm-10 text-center">
-									<a class="btn btn-secondary" th:href="@{/cancelar}">Cancelar</a>
-									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAgregar">Guardar Usuario</button>
-								</div>
-							</div>
-							<div class="alert-danger text-center" th:if="${formUsuarioErrorMessage}" th:text="${formUsuarioErrorMessage}">Name Error</div>
-							
-							<!--  Modal Agregar -->
-							<div class="modal fade" id="modalAgregar" tabindex="-1"	role="dialog" aria-labelledby="agregarModalTitulo"	aria-hidden="true">
-								<div class="modal-dialog modal-dialog-centered" role="document">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title" id="agregarModalTitulo">Confirmar Agregar</h5>
-											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-												<span aria-hidden="true">&times;</span>
-											</button>
-										</div>
-										<div class="modal-body"><h6>Are you sure you want to save this user?</h6></div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-secondary"	data-dismiss="modal">Close</button>
-											<input type="submit" class="btn btn-primary" value="Save Changes"  th:value="${editMode}?'Guardar Usuario':'Crear Usuario'">
+									<div class="form-group row">
+										<label for="nameUser" class="col-sm-12 col-form-label">Nombre
+											de Usuario</label>
+										<div class="col-sm-12">
+											<input th:field="${usuario.nombreUsuario}" type="text"
+												class="form-control" id="nameUser">
+											<div class="alert-danger"
+												th:if="${#fields.hasErrors('nombreUsuario')}"
+												th:errors="*{nombreUsuario}">Name Error</div>
 										</div>
 									</div>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
+									<div class="form-group row"
+										th:if="${editMode==null or editMode==false}">
+										<label for="contraseña" class="col-sm-12 col-form-label">Password</label>
+										<div class="col-sm-12">
+											<input th:field="${usuario.password}" type="password"
+												class="form-control" id="contraseña">
+											<div class="alert-danger"
+												th:if="${#fields.hasErrors('password')}"
+												th:errors="*{password}">Name Error</div>
+										</div>
+									</div>
 
-			<!-- Tabla de usuarios -->
-			<div class="tab-pane fade show" id="lista" th:classappend="${listTab}"
-				role="tabpanel" aria-labelledby="list-tab">
-				<div class="card">
-					<div class="card-header">
-						<h3>Listado de Usuarios</h3>
-					</div>
-					<div class="card-body">
-						<div class="table-responsive">
-							<table class="table table-striped">
-								<thead>
-									<tr>
-										<th scope="col">Nombre de Usuario</th>
-										<th scope="col">Contrasenia</th>
-										<th scope="col">Nombre Real</th>
-										<th scope="col">Apellido Real</th>
-										<th scope="col">Tipo de usuario</th>
-										<th scope="col">Acciones</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr th:each="usuario:${listarUsuarios}">
-										<td th:text="${usuario.nombreUsuario}"></td>
-										<td th:text="${usuario.password}"></td>
-										<td th:text="${usuario.nombreReal}"></td>
-										<td th:text="${usuario.apellidoReal}"></td>
-										<td th:text="${usuario.tipoUsuario}"></td>
-										<td>
-											<a href="#" th:href="@{'/editar/'+${usuario.id}}" class="btn btn-warning">Editar</a>
-											<a th:href="@{/eliminarUsuario/}+${usuario.id}" class="btn btn-danger">Eliminar</a>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-							
+									<div class="form-group row">
+										<label for="nombre" class="col-sm-12 col-form-label">Nombre
+											Real</label>
+										<div class="col-sm-12">
+											<input th:field="${usuario.nombreReal}" type="text"
+												class="form-control" id="nombre">
+											<div class="alert-danger"
+												th:if="${#fields.hasErrors('nombreReal')}"
+												th:errors="*{nombreReal}">Name Error</div>
+										</div>
+									</div>
+
+									<div class="form-group row">
+										<label for="apellido" class="col-sm-12 col-form-label">Apellido
+											Real</label>
+										<div class="col-sm-12">
+											<input th:field="${usuario.apellidoReal}" type="text"
+												class="form-control" id="apellido">
+											<div class="alert-danger"
+												th:if="${#fields.hasErrors('apellidoReal')}"
+												th:errors="*{apellidoReal}">Name Error</div>
+										</div>
+									</div>
+
+									<div class=" form-group row"
+										th:if="${editMode==null or editMode==false}">
+										<label class="col-sm-2 col-form-label">Tipo Usuario</label>
+										<div class="col-sm-10">
+											<div class="form-check">
+												<input class="form-check-input" type="radio"
+													name="gridRadios" th:field="${usuario.tipoUsuario}"
+													id="gridRadios1" value="CONSULTOR" checked> <label
+													class="form-check-label" for="gridRadios1">
+													CONSULTOR</label>
+											</div>
+											<div class="form-check">
+												<input class="form-check-input" type="radio"
+													name="gridRadios" th:field="${usuario.tipoUsuario}"
+													id="gridRadios2" value="ADMINISTRADOR"> <label
+													class="form-check-label" for="gridRadios2">
+													ADMINISTRADOR </label>
+											</div>
+											<div class="alert-danger"
+												th:if="${#fields.hasErrors('tipoUsuario')}"
+												th:errors="*{tipoUsuario}">Name Error</div>
+											<div class="form-check">
+												<input class="form-check-input" type="radio"
+													name="gridRadios" th:field="${usuario.tipoUsuario}"
+													id="gridRadios3" value="DB"> <label
+													class="form-check-label" for="gridRadios3"> DB </label>
+											</div>
+										</div>
+									</div>
+									<div class="form-group row">
+										<div class="col-sm-10 text-center">
+											<a class="btn btn-secondary" th:href="@{/cancelar}">Cancelar</a>
+											<button type="button" class="btn btn-primary"
+												data-toggle="modal" data-target="#modalAgregar">Guardar
+												Usuario</button>
+										</div>
+									</div>
+									<div class="alert-danger text-center"
+										th:if="${formUsuarioErrorMessage}"
+										th:text="${formUsuarioErrorMessage}">Name Error</div>
+
+									<!--  Modal Agregar -->
+									<div class="modal fade" id="modalAgregar" tabindex="-1"
+										role="dialog" aria-labelledby="agregarModalTitulo"
+										aria-hidden="true">
+										<div class="modal-dialog modal-dialog-centered"
+											role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="agregarModalTitulo">Confirmar
+														Agregar</h5>
+													<button type="button" class="close" data-dismiss="modal"
+														aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<div class="modal-body">
+													<h6>Are you sure you want to save this user?</h6>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary"
+														data-dismiss="modal">Close</button>
+													<input type="submit" class="btn btn-primary"
+														value="Save Changes"
+														th:value="${editMode}?'Guardar Usuario':'Crear Usuario'">
+												</div>
+											</div>
+										</div>
+									</div>
+								</form>
 							</div>
 						</div>
+					</div>
+
+					<!-- Tabla de usuarios -->
+					<div class="tab-pane fade show" id="lista"
+						th:classappend="${listTab}" role="tabpanel"
+						aria-labelledby="list-tab">
+						<div class="card">
+							<div class="card-header">
+								<h3>Listado de Usuarios</h3>
+							</div>
+							<div class="card-body">
+								<div class="table-responsive">
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<th scope="col">Nombre de Usuario</th>
+												<th scope="col">Contrasenia</th>
+												<th scope="col">Nombre Real</th>
+												<th scope="col">Apellido Real</th>
+												<th scope="col">Tipo de usuario</th>
+												<th scope="col">Acciones</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="usuario:${listarUsuarios}">
+												<td th:text="${usuario.nombreUsuario}"></td>
+												<td th:text="${usuario.password}"></td>
+												<td th:text="${usuario.nombreReal}"></td>
+												<td th:text="${usuario.apellidoReal}"></td>
+												<td th:text="${usuario.tipoUsuario}"></td>
+												<td><a href="#" th:href="@{'/editar/'+${usuario.id}}"
+													class="btn btn-warning">Editar</a> <a
+													th:href="@{/eliminarUsuario/}+${usuario.id}"
+													class="btn btn-danger">Eliminar</a></td>
+											</tr>
+										</tbody>
+									</table>
+
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 		<div th:insert="layout/footer :: footer"></div>
 	</div>
+
 
 </body>
 </html>

@@ -3,84 +3,90 @@
 <head>
 <meta charset="utf-8">
 <title>Alta</title>
-<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.5.0/css/bootstrap.min.css">
 </head>
 <body>
+
 	<div class="container">
 		<div th:insert="layout/header :: header"></div>
-		<div class="row">
-			<div class="col-md-6 offset-md-3">
-			<h1 class="text-center">Buscar una Persona</h1>
-				<form th:action="@{/getPersona}" th:object=${personaAux}
-					method="POST">
-					<div>
-						<label>Documento</label> 
-						<input th:field="${personaAux.documento}"
-							class="form-control" type="text" />
+		<div th:each="rol :${#authentication.getPrincipal().getAuthorities()}">
+			<div th:if="${rol.toString() == 'ADMINISTRADOR'}">
+				<div class="row">
+					<div class="col-md-6 offset-md-3">
+						<h1 class="text-center">Buscar una Persona</h1>
+						<form th:action="@{/getPersona}" th:object=${personaAux}
+							method="POST">
+							<div>
+								<label>Documento</label> <input
+									th:field="${personaAux.documento}" class="form-control"
+									type="text" />
+							</div>
+							<br>
+							<div class="form-group row">
+								<div class="col-sm-12 text-center">
+									<input type="submit" value="buscar" class="btn btn-primary">
+								</div>
+							</div>
+						</form>
 					</div>
-<br>
-					<div class="form-group row">
-						<div class="col-sm-12 text-center">
-							<input type="submit" value="buscar" class="btn btn-primary">
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-6 offset-md-3">
-				<div class="table-responsive">
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>Apellido</th>
-								<th>Nombre</th>
-								<th>Nacionalidad</th>
-								<th>Documento</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td th:text="${personaAux.id}"></td>
-								<td th:text="${personaAux.apellido}"></td>
-								<td th:text="${personaAux.nombres}"></td>
-								<td th:text="${personaAux.nacionalidad}"></td>
-								<td th:text="${personaAux.documento}"></td>
-	
-							</tr>
-						</tbody>
-					</table>
 				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-6 offset-md-3">
-			<form th:action="@{/savePersona}" th:object=${persona} method="POST">
-					<h3 class="text-center">Registrar persona</h3>
-					<div>
-						<label>Documento</label> <input th:field="*{documento}"
-							class="form-control" type="text" />
-					</div>
-					<div>
-						<label>Apellido</label> <input th:field="*{apellido}"
-							class="form-control" type="text" />
-					</div>
-					<div>
-						<label>Nombres</label> <input th:field="*{nombres}"
-							class="form-control" type="text" />
-					</div>
-					<div>
-						<label>Nacionalidad</label> <input th:field="*{nacionalidad}"
-							class="form-control" type="text" />
-					</div>
-<br>
-					<div class="form-group row">
-						<div class="col-sm-12 text-center">
-							<input type="submit" value="guardar" class="btn btn-primary">
+				<div class="row">
+					<div class="col-md-6 offset-md-3">
+						<div class="table-responsive">
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th>ID</th>
+										<th>Apellido</th>
+										<th>Nombre</th>
+										<th>Nacionalidad</th>
+										<th>Documento</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td th:text="${personaAux.id}"></td>
+										<td th:text="${personaAux.apellido}"></td>
+										<td th:text="${personaAux.nombres}"></td>
+										<td th:text="${personaAux.nacionalidad}"></td>
+										<td th:text="${personaAux.documento}"></td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
 					</div>
-				</form>
+				</div>
+				<div class="row">
+					<div class="col-md-6 offset-md-3">
+						<form th:action="@{/savePersona}" th:object=${persona}
+							method="POST">
+							<h3 class="text-center">Registrar persona</h3>
+							<div>
+								<label>Documento</label> <input th:field="*{documento}"
+									class="form-control" type="text" />
+							</div>
+							<div>
+								<label>Apellido</label> <input th:field="*{apellido}"
+									class="form-control" type="text" />
+							</div>
+							<div>
+								<label>Nombres</label> <input th:field="*{nombres}"
+									class="form-control" type="text" />
+							</div>
+							<div>
+								<label>Nacionalidad</label> <input th:field="*{nacionalidad}"
+									class="form-control" type="text" />
+							</div>
+							<br>
+							<div class="form-group row">
+								<div class="col-sm-12 text-center">
+									<input type="submit" value="guardar" class="btn btn-primary">
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div th:insert="layout/footer :: footer"></div>

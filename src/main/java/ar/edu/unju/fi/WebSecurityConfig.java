@@ -16,6 +16,14 @@ import ar.edu.unju.fi.trackpersonas.service.LoginUsuarioServiceImp;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
+	 @Autowired
+	    LoginUsuarioServiceImp userDetailsService;
+	    
+	    @Autowired
+	    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+	    	auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+	    }
+	
 	String[] resources = new String[]{
             "/include/**","/css/**","/icons/**","/img/**","/js/**","/layer/**","/webjars/**"
     };
@@ -30,6 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 				.antMatchers(resources).permitAll()
 				.antMatchers("/", "/home").permitAll()
+				//.antMatchers("/gestionUsuarios").access("hasRole('DB')")
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()
@@ -55,11 +64,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return bCryptPasswordEncoder;
     }
     
-    @Autowired
-    LoginUsuarioServiceImp userDetailsService;
-    
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-    	auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-    }
+   
 }
